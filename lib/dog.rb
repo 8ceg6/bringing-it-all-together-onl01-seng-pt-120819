@@ -1,6 +1,7 @@
 class Dog 
       attr_accessor :name, :breed, :id
       
+<<<<<<< HEAD
   def initialize(id: nil, name:, breed:)
       @name = name 
       @breed = breed
@@ -8,6 +9,18 @@ class Dog
   end 
       
   def self.create_table
+=======
+    
+     
+      def initialize(id: nil, name:, breed:)
+          @name = name 
+          @breed = breed
+          @id = id 
+        
+      end 
+      
+      def self.create_table
+>>>>>>> 14e9b21b25678b8d59cac0274fdd93fb88896968
       sql = <<-SQL
          CREATE TABLE IF NOT EXISTS dogs (
          id INTEGER PRIMARY KEY,
@@ -16,6 +29,7 @@ class Dog
          )
       SQL
       DB[:conn].execute(sql)
+<<<<<<< HEAD
   end
    
   def self.drop_table
@@ -25,10 +39,25 @@ class Dog
    
   def save 
       sql = <<-SQL 
+=======
+   end
+   
+   def self.drop_table
+        sql = "DROP TABLE IF EXISTS dogs"
+         DB[:conn].execute(sql)
+   end 
+   
+   def save 
+      #   if self.id
+      #   self.update
+      # else
+        sql = <<-SQL 
+>>>>>>> 14e9b21b25678b8d59cac0274fdd93fb88896968
               INSERT INTO dogs (name, breed)
               VALUES (?, ?)
               SQL
         DB[:conn].execute(sql, self.name, self.breed)
+<<<<<<< HEAD
         @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
       self
   end 
@@ -79,6 +108,24 @@ class Dog
             SQL
       DB[:conn].execute(sql, self.name, self.breed, self.id)
   end 
+=======
+        @id = DB[:conn].execute("SELECT last_insert_rowid()
+              FROM dogs")[0][0]
+      # end 
+      self
+   end 
+   
+   def self.create(name:, breed:)
+        dog = self.new(name: name, breed: breed)
+        dog.save
+        dog
+   end 
+   
+   def self.new_from_db(row)
+        
+   end 
+     
+>>>>>>> 14e9b21b25678b8d59cac0274fdd93fb88896968
 end 
 
 
